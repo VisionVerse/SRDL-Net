@@ -30,7 +30,7 @@ CDRNet consists of the following components:
 - **Structural Cue Compensation Module (SCCM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
 
-- **Multi-scale Structural Edge Guidance Head (MSEGH)**  
+- **Structural Edge Guidance (SEG)**  
   Aggregates multi-scale structure-enhanced features to generate edge guidance for boundary-aware decoding.
 
 - **Fog-induced Pseudo-change Disentanglement Module (FPDM)**  
