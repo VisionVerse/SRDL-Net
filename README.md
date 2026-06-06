@@ -8,17 +8,15 @@
   <img src="https://img.shields.io/badge/Scene-Foggy%20Remote%20Sensing-purple">
 </p>
 
----
+
 
 ## Introduction
 
-This repository provides the implementation of **CDRNet**, a **Change Discriminability Restoration Network** for **foggy remote sensing change detection**.
+This repository provides the implementation of a **Change Discriminability Restoration Network (CDRNet)** for **foggy remote sensing change detection**.
 
 Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, CDRNet restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
----
 
-## Framework
 
 <p align="center">
   <img src="CDRNet_framework.jpg" width="900">
