@@ -216,8 +216,7 @@ If you find this repository useful, please consider citing our paper:
 
 
 ## Acknowledgement
-
-We thank the authors of PVT and the open-source remote sensing change detection community for their valuable contributions.
+Thanks to the authors of remote sensing change detection for their excellent work！
 
 
 
