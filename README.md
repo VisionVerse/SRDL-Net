@@ -48,7 +48,7 @@ CDRNet consists of the following components:
 
 ---
 
-## Repository Structure
+## Installation
 
 ```text
 CDRNet/
@@ -74,9 +74,6 @@ CDRNet/
 └── README.md
 ```
 
----
-
-## Installation
 
 ```bash
 git clone https://github.com/your-username/CDRNet.git
@@ -88,6 +85,7 @@ conda activate cdrnet
 pip install -r requirements.txt
 ```
 
+Please install a PyTorch version compatible with your CUDA version.
 A typical environment includes:
 
 ```text
@@ -101,14 +99,11 @@ scikit-learn
 Pillow
 ```
 
-Please install a PyTorch version compatible with your CUDA version.
 
----
 
-## Pretrained Backbone
 
-CDRNet adopts **PVT-v2-B2** as the weight-sharing backbone.
 
+CDRNet adopts **PVT-v2-B2** as the weight-sharing backbone. 
 Please download the pretrained PVT-v2-B2 model and place it under:
 
 ```text
@@ -121,7 +116,6 @@ The default path is:
 path = './pretrained_model/pvt_v2_b2.pth'
 ```
 
----
 
 ## Dataset Preparation
 
@@ -191,7 +185,7 @@ The trained model will be saved to:
 ./train_output/CDRNet/{data_name}/
 ```
 
----
+
 
 ## Testing
 
@@ -205,7 +199,7 @@ python test.py \
 
 The predicted change maps will be saved in the configured output directory.
 
-
+---
 
 ## Citation
 
@@ -220,12 +214,10 @@ If you find this repository useful, please consider citing our paper:
 }
 ```
 
----
 
 ## Acknowledgement
 
-This project uses **PVT-v2** as the backbone. We thank the authors of PVT and the open-source remote sensing change detection community for their valuable contributions.
+We thank the authors of PVT and the open-source remote sensing change detection community for their valuable contributions.
 
----
 
 
