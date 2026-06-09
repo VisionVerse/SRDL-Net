@@ -19,7 +19,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
 
 
 <p align="center">
-  <img src="CDRNet_framework.jpg" width="900">
+  <img src="figures/CDRNet_framework.jpg" width="900">
 </p>
 
 CDRNet consists of the following components:
