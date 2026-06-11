@@ -10,7 +10,7 @@
 
 
 
-## Introduction
+## :pushpin: Introduction
 
 This repository provides the implementation of a **Change Discriminability Restoration Network (CDRNet)** for **foggy remote sensing change detection**.
 
@@ -35,7 +35,7 @@ CDRNet consists of the following components:
 
 ---
 
-## Installation
+## :rocket: Installation
 
 ```text
 CDRNet/
@@ -104,7 +104,7 @@ path = './pretrained_model/pvt_v2_b2.pth'
 ```
 
 
-## Dataset Preparation
+## :open_file_folder: Dataset Preparation
 
 The new foggy RSCD datasets can be obtained from the [Cloud Drive](https://pan.jiangnan.edu.cn/link/AA0298DDB05F1E43F6A70CF8A4D664AAA3) [RSCD].
 
@@ -141,7 +141,7 @@ The ground-truth mask should follow:
 
 ---
 
-## Training
+## :hourglass_flowing_sand: Training
 
 Modify the dataset path and training configuration in `train_v2.py`, then run:
 
@@ -176,7 +176,7 @@ The trained model will be saved to:
 
 
 
-## Testing
+## :bar_chart: Testing
 
 After training, run:
 
@@ -190,7 +190,7 @@ The predicted change maps will be saved in the configured output directory.
 
 ---
 
-## Citation
+## :bookmark_tabs: Citation
 
 If you find this repository useful, please consider citing our paper:
 
@@ -205,7 +205,7 @@ If you find this repository useful, please consider citing our paper:
 
 
 ## Acknowledgement
-:clap::clap::clap: Thanks to the authors of remote sensing change detection for their excellent work！
+### :clap::clap::clap: Thanks to the authors of remote sensing change detection for their excellent works！
 
 
 
