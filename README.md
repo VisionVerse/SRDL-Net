@@ -55,8 +55,7 @@ CDRNet/
 │   └── pvt_v2_b2.pth
 ├── figures/
 │   └── CDRNet_framework.png
-├── train_v2.py
-├── test.py
+├── train.py
 ├── requirements.txt
 └── README.md
 ```
