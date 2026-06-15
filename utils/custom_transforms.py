@@ -66,22 +66,6 @@ class RandomHorizontalFlip(object):
         return {'A': img_A, 'B': img_B, 'label': mask}
 
 
-class RandomRotate(object):
-    def __init__(self, degree):
-        self.degree = degree
-
-    def __call__(self, sample):
-        img_A = sample['A']
-        img_B = sample['B']
-        mask = sample['label']
-        rotate_degree = random.uniform(-1*self.degree, self.degree)
-        img_A = img_A.rotate(rotate_degree, Image.BILINEAR)
-        img_B = img_B.rotate(rotate_degree, Image.BILINEAR)
-        mask = mask.rotate(rotate_degree, Image.NEAREST)
-
-        return {'A': img_A, 'B': img_B, 'label': mask}
-
-
 class RandomGaussianBlur(object):
     def __call__(self, sample):
         img_A = sample['A']
@@ -92,45 +76,6 @@ class RandomGaussianBlur(object):
                 radius=random.random()))
             img_B = img_B.filter(ImageFilter.GaussianBlur(
                 radius=random.random()))
-
-        return {'A': img_A, 'B': img_B, 'label': mask}
-
-
-class RandomScaleCrop(object):
-    def __init__(self, base_size, crop_size, fill=0):
-        self.base_size = base_size
-        self.crop_size = crop_size
-        self.fill = fill
-
-    def __call__(self, sample):
-        img_A = sample['A']
-        img_B = sample['B']
-        mask = sample['label']
-        # random scale (short edge)
-        short_size = random.randint(int(self.base_size * 0.5), int(self.base_size * 2.0))
-        w, h = img_A.size
-        if h > w:
-            ow = short_size
-            oh = int(1.0 * h * ow / w)
-        else:
-            oh = short_size
-            ow = int(1.0 * w * oh / h)
-        img_A = img_A.resize((ow, oh), Image.BILINEAR)
-        img_B = img_B.resize((ow, oh), Image.BILINEAR)
-        mask = mask.resize((ow, oh), Image.NEAREST)
-        # pad crop
-        if short_size < self.crop_size:
-            padh = self.crop_size - oh if oh < self.crop_size else 0
-            padw = self.crop_size - ow if ow < self.crop_size else 0
-            img = ImageOps.expand(img, border=(0, 0, padw, padh), fill=0)
-            mask = ImageOps.expand(mask, border=(0, 0, padw, padh), fill=self.fill)
-        # random crop crop_size
-        w, h = img_A.size
-        x1 = random.randint(0, w - self.crop_size)
-        y1 = random.randint(0, h - self.crop_size)
-        img_A = img_A.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
-        img_B = img_B.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
-        mask = mask.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
 
         return {'A': img_A, 'B': img_B, 'label': mask}
 
@@ -160,23 +105,5 @@ class FixScaleCrop(object):
         img_A = img_A.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
         img_B = img_B.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
         mask = mask.crop((x1, y1, x1 + self.crop_size, y1 + self.crop_size))
-
-        return {'A': img_A, 'B': img_B, 'label': mask}
-
-class FixedResize(object):
-    def __init__(self, size):
-        self.size = (size, size)  # size: (h, w)
-
-    def __call__(self, sample):
-        img_A = sample['A']
-        img_B = sample['B']
-        mask = sample['label']
-
-        assert img_A.size == mask.size
-        assert img_B.size == mask.size
-
-        img_A = img_A.resize(self.size, Image.BILINEAR)
-        img_B = img_B.resize(self.size, Image.BILINEAR)
-        mask = mask.resize(self.size, Image.NEAREST)
 
         return {'A': img_A, 'B': img_B, 'label': mask}
