@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.distributions import kl
 from .backbones.pvtv2 import *
-from .tools import ConvBN
+from .cd_tools import ConvBN
 from .SCC import StructuralCueCompensation
 from .Edge import Edge_Prediction_Head
 from .FPDM import PseudoChangeDisentanglement
