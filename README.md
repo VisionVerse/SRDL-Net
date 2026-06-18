@@ -22,7 +22,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
   <img src="figures/SRCL-Net_framework.jpg" width="900">
 </p>
 
-CDRNet consists of the following components:
+SRCL-Net consists of the following components:
 
 - **Structural Cue Compensation Module (SCCM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
@@ -38,9 +38,9 @@ CDRNet consists of the following components:
 ## :rocket: Installation
 
 ```text
-CDRNet/
+SRCL-Net/
 ├── network/
-│   ├── CDRNet.py
+│   ├── SRCL-Net.py
 │   ├── SCC.py
 │   ├── FPS.py
 │   ├── Edge.py
@@ -63,10 +63,10 @@ CDRNet/
 
 ```bash
 git clone https://github.com/your-username/SRCL-Net.git
-cd CDRNet
+cd SRCL-Net
 
-conda create -n cdrnet python=3.8
-conda activate cdrnet
+conda create -n ournet python=3.8
+conda activate ournet
 
 pip install -r requirements.txt
 ```
@@ -89,7 +89,7 @@ Pillow
 
 
 
-CDRNet adopts **PVT-v2-B2** as the weight-sharing backbone. 
+SRCL-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
 Please download the pretrained PVT-v2-B2 model and place it under:
 
 ```text
@@ -190,7 +190,7 @@ The predicted change maps will be saved in the configured output directory.
 If you find this repository useful, please consider citing our paper:
 
 ```bibtex
-@article{cdrnet2026,
+@article{srcl2026zhou,
   title={Structure-Compensated Reliable Change Learning for Foggy Remote Sensing Change Detection},
   author={},
   journal={},
