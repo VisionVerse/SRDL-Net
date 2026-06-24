@@ -12,7 +12,7 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Structure-Compensated Reliable Discriminability Learning Network (SRDL-Net)** for **foggy remote sensing change detection**.
+This repository provides the implementation of a **Structure-compensated Reliable Discriminability Learning Network (SRDL-Net)** for **foggy remote sensing change detection**.
 
 Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, SRDL-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
