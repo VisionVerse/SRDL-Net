@@ -62,7 +62,7 @@ SRDL-Net/
 
 
 ```bash
-git clone https://github.com/your-username/SRDL-Net.git
+git https://github.com/VisionVerse/SRDL-Net.git
 cd SRDL-Net
 
 conda create -n ournet python=3.8
