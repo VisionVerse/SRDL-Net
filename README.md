@@ -1,4 +1,4 @@
-# SRDL-Net: Structure-compensated Reliable Discriminability Learning for Foggy Remote Sensing Change Detection
+# Structure-compensated Reliable Discriminability Learning for Cloud-Fog Degraded Remote Sensing Change Detection
 
 
 <p align="center">
