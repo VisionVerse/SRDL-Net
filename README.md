@@ -19,7 +19,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
 
 
 <p align="center">
-  <img src="figures/framework.jpg" width="900">
+  <img src="figures/Framework.jpg" width="900">
 </p>
 
 SRDL-Net consists of the following components:
