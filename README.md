@@ -12,7 +12,7 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Structure-compensated Reliable Discriminability Learning Network (SRDL-Net)** for **foggy remote sensing change detection**.
+This repository provides the implementation of a **Structure-compensated Reliable Discriminability Learning Network (SRDL-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
 Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, SRDL-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
@@ -30,7 +30,7 @@ SRDL-Net consists of the following components:
 - **Structural Edge Guidance (SEG)**  
   Aggregates multi-scale structure-enhanced features to generate edge guidance for boundary-aware decoding.
 
-- **Fog-induced Pseudo-change Suppression Module (FPSM)**  
+- **Degradation-induced Pseudo-change Suppression Module (DPSM)**  
   Suppresses fog-induced pseudo-change responses and progressively decodes reliable changed regions.
 
 ---
@@ -42,7 +42,7 @@ SRDL-Net/
 ├── network/
 │   ├── SRDL-Net.py
 │   ├── SCC.py
-│   ├── FPS.py
+│   ├── DPSM.py
 │   ├── Edge.py
 │   ├── cd_tools.py
 │   └── backbones/
@@ -54,7 +54,7 @@ SRDL-Net/
 ├── pretrained_model/
 │   └── pvt_v2_b2.pth
 ├── figures/
-│   └── framework.jpg
+│   └── Framework.jpg
 ├── train.py
 ├── requirements.txt
 └── README.md
@@ -142,7 +142,7 @@ Modify the dataset path and training configuration in `train_v2.py`, then run:
 
 ```bash
 python train.py \
-  --data_name foggy-LEVIR-CD \
+  --data_name CFD-LEVIR-CD \
   --epoch 200 \
   --batchsize 32 \
   --trainsize 256 \
@@ -177,8 +177,8 @@ After training, run:
 
 ```bash
 python test.py \
-  --data_name foggy-LEVIR-CD \
-  --model_path ./train_output/SRDL-Net/foggy-LEVIR-CD/Seg_epoch_best.pth
+  --data_name CFD-LEVIR-CD \
+  --model_path ./train_output/SRDL-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
 ```
 
 The predicted change maps will be saved in the configured output directory.
@@ -191,7 +191,7 @@ If you find this repository useful, please consider citing our paper:
 
 ```bibtex
 @article{srdl2026zhou,
-  title={Structure-Compensated Reliable Discriminability Learning for Foggy Remote Sensing Change Detection},
+  title={Structure-compensated Reliable Discriminability Learning for Cloud-Fog Degraded Remote Sensing Change Detection},
   author={},
   journal={},
   year={2026}
