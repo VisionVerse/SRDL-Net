@@ -14,7 +14,7 @@
 
 This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DASF-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
-Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, SRDL-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
+Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DASF-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
 
 
