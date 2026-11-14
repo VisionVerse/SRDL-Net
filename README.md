@@ -1,4 +1,4 @@
-# Structure-compensated Reliable Discriminability Learning for Cloud-Fog Degraded Remote Sensing Change Detection
+# Degradation-aware Structural-Frequency Learning for Robust Remote Sensing Change Detection
 
 
 <p align="center">
@@ -12,7 +12,7 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Structure-compensated Reliable Discriminability Learning Network (SRDL-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DASF-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
 Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, SRDL-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
