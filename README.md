@@ -22,7 +22,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
   <img src="figures/Framework.jpg" width="900">
 </p>
 
-SRDL-Net consists of the following components:
+DASF-Net consists of the following components:
 
 - **Structural Cue Compensation Module (SCCM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
@@ -38,9 +38,9 @@ SRDL-Net consists of the following components:
 ## :rocket: Installation
 
 ```text
-SRDL-Net/
+DASF-Net/
 ├── network/
-│   ├── SRDL-Net.py
+│   ├── DASF-Net.py
 │   ├── SCC.py
 │   ├── DPSM.py
 │   ├── Edge.py
@@ -62,8 +62,8 @@ SRDL-Net/
 
 
 ```bash
-git https://github.com/VisionVerse/SRDL-Net.git
-cd SRDL-Net
+git https://github.com/VisionVerse/DASF-Net.git
+cd DASF-Net
 
 conda create -n ournet python=3.8
 conda activate ournet
@@ -89,7 +89,7 @@ Pillow
 
 
 
-SRDL-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
+DASF-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
 Please download the pretrained PVT-v2-B2 model and place it under:
 
 ```text
@@ -166,7 +166,7 @@ Main options:
 The trained model will be saved to:
 
 ```text
-./train_output/SRDL-Net/{data_name}/
+./train_output/DASF-Net/{data_name}/
 ```
 
 
@@ -178,7 +178,7 @@ After training, run:
 ```bash
 python test.py \
   --data_name CFD-LEVIR-CD \
-  --model_path ./train_output/SRDL-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
+  --model_path ./train_output/DASF-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
 ```
 
 The predicted change maps will be saved in the configured output directory.
@@ -190,7 +190,7 @@ The predicted change maps will be saved in the configured output directory.
 If you find this repository useful, please consider citing our paper:
 
 ```bibtex
-@article{srdl2026zhou,
+@article{DASF2026zhou,
   title={Structure-compensated Reliable Discriminability Learning for Cloud-Fog Degraded Remote Sensing Change Detection},
   author={},
   journal={},
