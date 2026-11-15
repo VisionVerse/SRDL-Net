@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Evaluator(object):
+class Evaluator:
     def __init__(self, num_class):
         self.num_class = num_class
         self.confusion_matrix = np.zeros((self.num_class,)*2, dtype = np.float64)
@@ -51,7 +51,7 @@ class Evaluator(object):
         )
         MIoU = np.nanmean(MIoU)
         return MIoU
-    
+
     def Intersection_over_Union(self):
         IoU = self._safe_divide(
             np.diag(self.confusion_matrix),
@@ -95,7 +95,4 @@ class Evaluator(object):
 
     def reset(self):
         self.confusion_matrix = np.zeros((self.num_class,) * 2)
-
-
-
 

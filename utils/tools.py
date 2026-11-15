@@ -1,7 +1,6 @@
-import torch.nn as nn
 import torch
 import numpy as np
-import torch.nn.functional as F
+
 
 def adjust_lr(optimizer, init_lr, epoch, decay_rate=0.1, decay_epoch=30):
     decay = decay_rate ** (epoch // decay_epoch)
@@ -9,7 +8,7 @@ def adjust_lr(optimizer, init_lr, epoch, decay_rate=0.1, decay_epoch=30):
         param_group['lr'] = decay * init_lr
 
 
-class AvgMeter(object):
+class AvgMeter:
     def __init__(self, num=40):
         self.num = num
         self.reset()
@@ -30,9 +29,6 @@ class AvgMeter(object):
 
     def show(self):
         a = len(self.losses)
-        b = np.maximum(a-self.num, 0)
+        b = np.maximum(a - self.num, 0)
         c = self.losses[b:]
-        #print(c)
-        #d = torch.mean(torch.stack(c))
-        #print(d)
         return torch.mean(torch.stack(c))

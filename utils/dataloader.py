@@ -20,8 +20,7 @@ def mask_to_onehot(mask, palette):
     semantic_map = []
     for colour in palette:
         equality = np.equal(mask, colour)
-        class_map = np.all(equality, axis=-1) #单通道有索引使用
-        # class_map = equality.astype(int)  #单通道无索引使用
+        class_map = np.all(equality, axis=-1)
         semantic_map.append(class_map)
     semantic_map = np.stack(semantic_map, axis=-1).astype(np.float32)
     semantic_map = np.argmax(semantic_map,axis=-1)
@@ -29,11 +28,11 @@ def mask_to_onehot(mask, palette):
 
 
 class Multi_Class_Segmentation_Dataset(data.Dataset):
-    def __init__(self, img_A_root, img_B_root, gt_root, trainsize, palatte, mode, mosaic_ratio=0.25):
+    def __init__(self, img_A_root, img_B_root, gt_root, trainsize, palette, mode, mosaic_ratio=0.25):
         self.trainsize = trainsize
         self.image_A_root = img_A_root
         self.image_B_root = img_B_root
-        self.palatte = palatte
+        self.palette = palette
         self.mode = mode
         self.mosaic_ratio = mosaic_ratio
         self.gt_root = gt_root
@@ -63,70 +62,70 @@ class Multi_Class_Segmentation_Dataset(data.Dataset):
         elif self.mode == 'test':
             file_name = self.images_A[index].split('/')[-1][:-len(".tif")]
             return self.transform_test(sample),file_name
-        
+
     def load_img_and_mask(self, index):
         image_A = Image.open(self.images_A[index]).convert('RGB')
         image_B = Image.open(self.images_B[index]).convert('RGB')
         mask = np.array(Image.open(self.gts[index]).convert('RGB'), dtype=np.uint8)
-        mask = mask_to_onehot(mask, self.palatte)
+        mask = mask_to_onehot(mask, self.palette)
         mask = Image.fromarray(np.uint8(mask))
         return image_A, image_B, mask
 
     def load_mosaic_img_and_mask(self, index):
-       indexes = [index] + [random.randint(0, self.size - 1) for _ in range(3)]
-       img_a_A, img_a_B,  mask_a = self.load_img_and_mask(indexes[0])
-       img_b_A, img_b_B, mask_b = self.load_img_and_mask(indexes[1])
-       img_c_A, img_c_B, mask_c = self.load_img_and_mask(indexes[2])
-       img_d_A, img_d_B, mask_d = self.load_img_and_mask(indexes[3])
+        indexes = [index] + [random.randint(0, self.size - 1) for _ in range(3)]
+        img_a_A, img_a_B, mask_a = self.load_img_and_mask(indexes[0])
+        img_b_A, img_b_B, mask_b = self.load_img_and_mask(indexes[1])
+        img_c_A, img_c_B, mask_c = self.load_img_and_mask(indexes[2])
+        img_d_A, img_d_B, mask_d = self.load_img_and_mask(indexes[3])
 
-       w = self.trainsize
-       h = self.trainsize
+        w = self.trainsize
+        h = self.trainsize
 
-       start_x = w // 4
-       strat_y = h // 4
+        start_x = w // 4
+        start_y = h // 4
         # The coordinates of the splice center
-       offset_x = random.randint(start_x, (w - start_x))
-       offset_y = random.randint(strat_y, (h - strat_y))
+        offset_x = random.randint(start_x, (w - start_x))
+        offset_y = random.randint(start_y, (h - start_y))
 
 
-       crop_size_a = (offset_x, offset_y)
-       crop_size_b = (w - offset_x, offset_y)
-       crop_size_c = (offset_x, h - offset_y)
-       crop_size_d = (w - offset_x, h - offset_y)
+        crop_size_a = (offset_x, offset_y)
+        crop_size_b = (w - offset_x, offset_y)
+        crop_size_c = (offset_x, h - offset_y)
+        crop_size_d = (w - offset_x, h - offset_y)
 
-       croped_a_A, croped_a_B, mask_crop_a = randomCrop_Mosaic(img_a_A.copy(), img_a_B.copy(), mask_a.copy(),crop_size_a[0], crop_size_a[1]) 
-       croped_b_A, croped_b_B, mask_crop_b = randomCrop_Mosaic(img_b_A.copy(), img_b_B.copy(), mask_b.copy(),crop_size_b[0], crop_size_b[1])
-       croped_c_A, croped_c_B, mask_crop_c = randomCrop_Mosaic(img_c_A.copy(), img_c_B.copy(), mask_c.copy(),crop_size_c[0], crop_size_c[1])
-       croped_d_A, croped_d_B, mask_crop_d = randomCrop_Mosaic(img_d_A.copy(), img_d_B.copy(), mask_d.copy(),crop_size_d[0], crop_size_d[1])
+        croped_a_A, croped_a_B, mask_crop_a = randomCrop_Mosaic(img_a_A.copy(), img_a_B.copy(), mask_a.copy(),crop_size_a[0], crop_size_a[1])
+        croped_b_A, croped_b_B, mask_crop_b = randomCrop_Mosaic(img_b_A.copy(), img_b_B.copy(), mask_b.copy(),crop_size_b[0], crop_size_b[1])
+        croped_c_A, croped_c_B, mask_crop_c = randomCrop_Mosaic(img_c_A.copy(), img_c_B.copy(), mask_c.copy(),crop_size_c[0], crop_size_c[1])
+        croped_d_A, croped_d_B, mask_crop_d = randomCrop_Mosaic(img_d_A.copy(), img_d_B.copy(), mask_d.copy(),crop_size_d[0], crop_size_d[1])
 
-       croped_a_A, croped_a_B, mask_crop_a = np.array(croped_a_A), np.array(croped_a_B), np.array(mask_crop_a)
-       croped_b_A, croped_b_B, mask_crop_b = np.array(croped_b_A), np.array(croped_b_B), np.array(mask_crop_b)
-       croped_c_A, croped_c_B, mask_crop_c = np.array(croped_c_A), np.array(croped_c_B), np.array(mask_crop_c)
-       croped_d_A, croped_d_B, mask_crop_d = np.array(croped_d_A), np.array(croped_d_B), np.array(mask_crop_d)
+        croped_a_A, croped_a_B, mask_crop_a = np.array(croped_a_A), np.array(croped_a_B), np.array(mask_crop_a)
+        croped_b_A, croped_b_B, mask_crop_b = np.array(croped_b_A), np.array(croped_b_B), np.array(mask_crop_b)
+        croped_c_A, croped_c_B, mask_crop_c = np.array(croped_c_A), np.array(croped_c_B), np.array(mask_crop_c)
+        croped_d_A, croped_d_B, mask_crop_d = np.array(croped_d_A), np.array(croped_d_B), np.array(mask_crop_d)
 
-       top_A = np.concatenate((croped_a_A, croped_b_A), axis=1)
-       bottom_A = np.concatenate((croped_c_A, croped_d_A), axis=1)
-       img_A = np.concatenate((top_A, bottom_A), axis=0)
+        top_A = np.concatenate((croped_a_A, croped_b_A), axis=1)
+        bottom_A = np.concatenate((croped_c_A, croped_d_A), axis=1)
+        img_A = np.concatenate((top_A, bottom_A), axis=0)
 
-       top_B = np.concatenate((croped_a_B, croped_b_B), axis=1)
-       bottom_B = np.concatenate((croped_c_B, croped_d_B), axis=1)
-       img_B = np.concatenate((top_B, bottom_B), axis=0)
+        top_B = np.concatenate((croped_a_B, croped_b_B), axis=1)
+        bottom_B = np.concatenate((croped_c_B, croped_d_B), axis=1)
+        img_B = np.concatenate((top_B, bottom_B), axis=0)
 
 
-       top_mask = np.concatenate((mask_crop_a, mask_crop_b), axis=1)
-       bottom_mask = np.concatenate((mask_crop_c, mask_crop_d), axis=1)
-       mask = np.concatenate((top_mask, bottom_mask), axis=0)
-       mask = np.ascontiguousarray(mask)
+        top_mask = np.concatenate((mask_crop_a, mask_crop_b), axis=1)
+        bottom_mask = np.concatenate((mask_crop_c, mask_crop_d), axis=1)
+        mask = np.concatenate((top_mask, bottom_mask), axis=0)
+        mask = np.ascontiguousarray(mask)
 
-       img_A = np.ascontiguousarray(img_A)
-       img_B = np.ascontiguousarray(img_B)
+        img_A = np.ascontiguousarray(img_A)
+        img_B = np.ascontiguousarray(img_B)
 
-       img_A = Image.fromarray(img_A)
-       img_B = Image.fromarray(img_B)
-       mask = Image.fromarray(mask)
+        img_A = Image.fromarray(img_A)
+        img_B = Image.fromarray(img_B)
+        mask = Image.fromarray(mask)
 
-       return img_A, img_B, mask
-    
+        return img_A, img_B, mask
+
     def transform_tr(self, sample):
         composed_transforms = transforms.Compose([
             tr.RandomHorizontalFlip(),
@@ -180,27 +179,12 @@ class Multi_Class_Segmentation_Dataset(data.Dataset):
     def __len__(self):
         return self.size
 
-def get_loader(img_A_root, img_B_root, gt_root, trainsize, palatte, mode, batchsize, mosaic_ratio=0.25, num_workers=4, shuffle=True, pin_memory=True):
+def get_loader(img_A_root, img_B_root, gt_root, trainsize, palette, mode, batchsize, mosaic_ratio=0.25, num_workers=4, shuffle=True, pin_memory=True):
 
-    dataset = Multi_Class_Segmentation_Dataset(img_A_root = img_A_root, img_B_root = img_B_root, gt_root = gt_root, trainsize = trainsize, palatte = palatte, mode = mode, mosaic_ratio=mosaic_ratio)
+    dataset = Multi_Class_Segmentation_Dataset(img_A_root = img_A_root, img_B_root = img_B_root, gt_root = gt_root, trainsize = trainsize, palette = palette, mode = mode, mosaic_ratio=mosaic_ratio)
     data_loader = data.DataLoader(dataset=dataset,
                                   batch_size=batchsize,
                                   shuffle=shuffle,
                                   num_workers=num_workers,
                                   pin_memory=pin_memory)
     return data_loader
-
-
-
-# if __name__ == '__main__':
-#     root = '/home/lijiepan/multi_class_semantic_segementation/drive_dataset/train/'
-#     batchsize = 8
-#     trainsize = 512
-#     palette = [[255, 0, 0], [0, 0, 255], [0, 255, 0], [255, 255, 255], [0, 0, 0]]
-#     data = get_loader(root, batchsize, trainsize, palette, num_workers=4, shuffle=True, pin_memory=True)
-#     for x,y in data:
-#         print(x)
-#         print(y)
-
-
-

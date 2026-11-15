@@ -2,7 +2,7 @@ import torch
 import random
 import numpy as np
 
-from PIL import Image, ImageOps, ImageFilter
+from PIL import Image, ImageFilter
 
 class Normalize(object):
     """Normalize a tensor image with mean and standard deviation.
