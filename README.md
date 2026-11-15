@@ -12,9 +12,9 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DASF-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
-Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DASF-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
+Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DSF-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
 
 
 
@@ -22,7 +22,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
   <img src="figures/Framework.jpg" width="900">
 </p>
 
-DASF-Net consists of the following components:
+DSF-Net consists of the following components:
 
 - **Structural Cue Compensation Module (SCCM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
@@ -38,9 +38,9 @@ DASF-Net consists of the following components:
 ## :rocket: Installation
 
 ```text
-DASF-Net/
+DSF-Net/
 ├── network/
-│   ├── DASF-Net.py
+│   ├── DSF-Net.py
 │   ├── SCC.py
 │   ├── DPSM.py
 │   ├── Edge.py
@@ -62,8 +62,8 @@ DASF-Net/
 
 
 ```bash
-git https://github.com/VisionVerse/DASF-Net.git
-cd DASF-Net
+git https://github.com/VisionVerse/DSF-Net.git
+cd DSF-Net
 
 conda create -n ournet python=3.8
 conda activate ournet
@@ -89,7 +89,7 @@ Pillow
 
 
 
-DASF-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
+DSF-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
 Please download the pretrained PVT-v2-B2 model and place it under:
 
 ```text
@@ -166,7 +166,7 @@ Main options:
 The trained model will be saved to:
 
 ```text
-./train_output/DASF-Net/{data_name}/
+./train_output/DSF-Net/{data_name}/
 ```
 
 
@@ -178,7 +178,7 @@ After training, run:
 ```bash
 python test.py \
   --data_name CFD-LEVIR-CD \
-  --model_path ./train_output/DASF-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
+  --model_path ./train_output/DSF-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
 ```
 
 The predicted change maps will be saved in the configured output directory.
