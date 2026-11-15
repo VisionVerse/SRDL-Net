@@ -24,13 +24,13 @@ Fog interference usually weakens structural cues of real changed regions and ind
 
 DSF-Net consists of the following components:
 
-- **Structural Cue Compensation Module (SCCM)**  
+- **Structural Cue Compensation Module (CSEM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
 
 - **Structural Edge Guidance (SEG)**  
   Aggregates multi-scale structure-enhanced features to generate edge guidance for boundary-aware decoding.
 
-- **Degradation-induced Pseudo-change Suppression Module (DPSM)**  
+- **Degradation-induced Pseudo-change Suppression Module (ERDM)**  
   Suppresses fog-induced pseudo-change responses and progressively decodes reliable changed regions.
 
 ---
@@ -41,8 +41,8 @@ DSF-Net consists of the following components:
 DSF-Net/
 ├── network/
 │   ├── DSF-Net.py
-│   ├── SCC.py
-│   ├── DPSM.py
+│   ├── CSEM.py
+│   ├── ERDM.py
 │   ├── Edge.py
 │   ├── cd_tools.py
 │   └── backbones/
