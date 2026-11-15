@@ -12,7 +12,7 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** framework for **Cloud-Fog Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** framework for **Robust Degraded Remote Sensing Change Detection**.
 
 Cloud-fog degradation presents two related challenges for remote sensing change detection: it weakens structural evidence of genuine land-cover changes and introduces misleading responses in unchanged regions. DSF-Net coordinates **complementary structural evidence modeling** with **evidence-guided reliability decoding** to improve the discrimination of changed and unchanged areas under such interference.
 
