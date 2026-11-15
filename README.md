@@ -185,18 +185,6 @@ The predicted change maps will be saved in the configured output directory.
 
 ---
 
-## :bookmark_tabs: Citation
-
-If you find this repository useful, please consider citing our paper:
-
-```bibtex
-@article{DASF2026zhou,
-  title={Structure-compensated Reliable Discriminability Learning for Cloud-Fog Degraded Remote Sensing Change Detection},
-  author={},
-  journal={},
-  year={2026}
-}
-```
 
 
 ## Acknowledgement
