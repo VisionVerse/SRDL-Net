@@ -5,16 +5,16 @@
   <img src="https://img.shields.io/badge/Scene-Foggy%20Remote%20Sensing-green">
   <img src="https://img.shields.io/badge/Task-Remote%20Sensing%20Change%20Detection-purple">
   <img src="https://img.shields.io/badge/Python-3.10-blue">
-  <img src="https://img.shields.io/badge/PyTorch-2.10-red">
+  <img src="https://img.shields.io/badge/PyTorch-2.0-red">
 </p>
 
 
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** for **Cloud-Fog Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of **DSF-Net**, a **Degradation-aware Structural-Frequency Learning** framework for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
-Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DSF-Net restores change discriminability by compensating fog-weakened structural cues and disentangling fog-induced pseudo-change responses during progressive change decoding.
+Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DSF-Net restores change discriminability by compensating fog-weakened structural cues and screening unreliable frequency responses during progressive change decoding.
 
 
 
@@ -25,10 +25,13 @@ Fog interference usually weakens structural cues of real changed regions and ind
 DSF-Net consists of the following components:
 
 - **Complementary Structural Evidence Modeling (CSEM)**  
-  Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
+  Compensates fog-weakened structural cues through spatial position evidence (SPE) and complementary frequency cues (CFC).
+
+- **Boundary Evidence Generation (BEG)**  
+  Aggregates multi-scale structural evidence to generate boundary evidence for boundary-aware decoding.
 
 - **Evidence-guided Reliability Decoding Module (ERDM)**  
-  Suppresses fog-induced pseudo-change responses and progressively decodes reliable changed regions.
+  Calibrates structural evidence (SEC), consolidates cross-scale semantics (CSC) and screens frequency reliability (FRS) to progressively decode reliable changed regions.
 
 ---
 
@@ -37,14 +40,15 @@ DSF-Net consists of the following components:
 ```text
 DSF-Net/
 ├── network/
-│   ├── DSF-Net.py
+│   ├── DSFNet.py
 │   ├── CSEM.py
+│   ├── BEG.py
 │   ├── ERDM.py
-│   ├── Edge.py
 │   ├── cd_tools.py
 │   └── backbones/
 │       └── pvtv2.py
 ├── utils/
+│   ├── custom_transforms.py
 │   ├── dataloader.py
 │   ├── metrics.py
 │   └── tools.py
@@ -59,11 +63,11 @@ DSF-Net/
 
 
 ```bash
-git https://github.com/VisionVerse/DSF-Net.git
+git clone https://github.com/VisionVerse/DSF-Net.git
 cd DSF-Net
 
-conda create -n ournet python=3.8
-conda activate ournet
+conda create -n dsfnet python=3.10
+conda activate dsfnet
 
 pip install -r requirements.txt
 ```
@@ -73,15 +77,13 @@ A typical environment includes:
 
 ```text
 python >= 3.10
-torch >= 2.10
+torch >= 2.0
 torchvision
+timm
 numpy
-opencv-python
 tqdm
-scikit-learn
 Pillow
 ```
-
 
 
 
@@ -131,11 +133,13 @@ The ground-truth mask should follow:
 1: changed
 ```
 
+The benchmarks are referred to as `CFD-LEVIR-CD`, `CFD-LEVIR-CD+`, `CFD-SYSU-CD` and `HH` in the paper, and the same names are used for `--data_name`.
+
 ---
 
 ## :hourglass_flowing_sand: Training
 
-Modify the dataset path and training configuration in `train_v2.py`, then run:
+Modify the dataset path and training configuration in `train.py`, then run:
 
 ```bash
 python train.py \
@@ -144,8 +148,7 @@ python train.py \
   --batchsize 32 \
   --trainsize 256 \
   --lr 1e-4 \
-  --edge_weight 0.1 \
-  --reg_weight 1e-4
+  --edge_weight 0.1
 ```
 
 Main options:
@@ -157,10 +160,9 @@ Main options:
 --trainsize       input image size
 --lr              learning rate
 --edge_weight     weight of edge supervision
---reg_weight      weight of regularization
 ```
 
-The trained model will be saved to:
+The training logs will be saved to:
 
 ```text
 ./train_output/DSF-Net/{data_name}/
@@ -182,10 +184,5 @@ The predicted change maps will be saved in the configured output directory.
 
 ---
 
-
-
 ## Acknowledgement
-### :clap::clap::clap: Thanks to the authors of remote sensing change detection for their excellent works！
-
-
-
+### :clap::clap::clap: Thanks to the authors of remote sensing change detection for their excellent works!
