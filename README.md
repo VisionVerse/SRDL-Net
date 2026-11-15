@@ -27,7 +27,7 @@ DSF-Net consists of the following components:
 - **Complementary Structural Evidence Modeling (CSEM)**  
   Compensates fog-weakened structural cues through spatial semantic preservation and wavelet-domain structural modeling.
 
-- **Degradation-induced Pseudo-change Suppression Module (ERDM)**  
+- **Evidence-guided Reliability Decoding Module (ERDM)**  
   Suppresses fog-induced pseudo-change responses and progressively decodes reliable changed regions.
 
 ---
