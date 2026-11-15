@@ -19,7 +19,7 @@ Fog interference usually weakens structural cues of real changed regions and ind
 
 
 <p align="center">
-  <img src="figures/Framework.jpg" width="900">
+  <img src="Framework.jpg" width="900">
 </p>
 
 DSF-Net consists of the following components:
