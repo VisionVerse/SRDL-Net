@@ -12,9 +12,9 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of **DSF-Net**, a **Degradation-aware Structural-Frequency Learning** framework for **Cloud-Fog Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** framework for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
-Fog interference usually weakens structural cues of real changed regions and induces pseudo-change responses in unchanged backgrounds. To address this issue, DSF-Net restores change discriminability by compensating fog-weakened structural cues and screening unreliable frequency responses during progressive change decoding.
+Cloud-fog degradation presents two related challenges for remote sensing change detection: it weakens structural evidence of genuine land-cover changes and introduces misleading responses in unchanged regions. DSF-Net coordinates **complementary structural evidence modeling** with **evidence-guided reliability decoding** to improve the discrimination of changed and unchanged areas under such interference.
 
 
 
@@ -22,17 +22,10 @@ Fog interference usually weakens structural cues of real changed regions and ind
   <img src="Framework.jpg" width="900">
 </p>
 
-DSF-Net consists of the following components:
+The architecture has two main components:
 
-- **Complementary Structural Evidence Modeling (CSEM)**  
-  Compensates fog-weakened structural cues through spatial position evidence (SPE) and complementary frequency cues (CFC).
-
-- **Boundary Evidence Generation (BEG)**  
-  Aggregates multi-scale structural evidence to generate boundary evidence for boundary-aware decoding.
-
-- **Evidence-guided Reliability Decoding Module (ERDM)**  
-  Calibrates structural evidence (SEC), consolidates cross-scale semantics (CSC) and screens frequency reliability (FRS) to progressively decode reliable changed regions.
-
+- **Complementary Structural Evidence Modeling (CSEM)** combines **Spatial Position Evidence (SPE)** with **Complementary Frequency Cues (CFC)**. Spatial references are integrated with wavelet-domain low- and high-frequency structural information rather than enhancing a single frequency component in isolation.
+- **Evidence-guided Reliability Decoding (ERDM)** refines candidate change features through **Structural Evidence Calibration (SEC)**, **Cross-scale Semantic Consolidation (CSC)**, and **Frequency Reliability Screening (FRS)**.
 ---
 
 ## :rocket: Installation
