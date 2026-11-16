@@ -101,12 +101,6 @@ Please download the pretrained PVT-v2-B2 model and place it under:
 ./pretrained_model/pvt_v2_b2.pth
 ```
 
-The default path is:
-
-```python
-path = './pretrained_model/pvt_v2_b2.pth'
-```
-
 
 Modify the dataset path and training configuration in `train.py`, then run:
 
