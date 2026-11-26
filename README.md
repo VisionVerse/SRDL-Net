@@ -12,9 +12,10 @@
 
 ## :pushpin: Introduction
 
-This repository provides the implementation of a **Degradation-aware Structural-Frequency Learning (DSF-Net)** framework for **Robust Degraded Remote Sensing Change Detection**.
+This repository provides the implementation of a **Structure-compensated Reliable Discriminability
+Learning (SRDL-Net)** framework for **Cloud-Fog Degraded Remote Sensing Change Detection**.
 
-Cloud-fog degradation presents two related challenges for remote sensing change detection: it weakens structural evidence of genuine land-cover changes and introduces misleading responses in unchanged regions. DSF-Net coordinates **complementary structural evidence modeling** with **evidence-guided reliability decoding** to improve the discrimination of changed and unchanged areas under such interference.
+Cloud-fog degradation presents two related challenges for remote sensing change detection: it weakens structural evidence of genuine land-cover changes and introduces misleading responses in unchanged regions. SRDL-Net coordinates **complementary structural evidence modeling** with **evidence-guided reliability decoding** to improve the discrimination of changed and unchanged areas under such interference.
 
 
 
@@ -69,8 +70,8 @@ The benchmarks are referred to as `CFD-LEVIR-CD`, `CFD-LEVIR-CD+`, `CFD-SYSU-CD`
 ## :hourglass_flowing_sand: Training and Testing
 
 ```bash
-git clone https://github.com/VisionVerse/DSF-Net.git
-cd DSF-Net
+git clone https://github.com/VisionVerse/SRDL-Net.git
+cd SRDL-Net
 
 conda create -n dsfnet python=3.10
 conda activate dsfnet
@@ -94,7 +95,7 @@ Pillow
 
 
 
-DSF-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
+SRDL-Net adopts **PVT-v2-B2** as the weight-sharing backbone. 
 Please download the pretrained PVT-v2-B2 model and place it under:
 
 ```text
@@ -128,7 +129,7 @@ Main options:
 The training logs will be saved to:
 
 ```text
-./train_output/DSF-Net/{data_name}/
+./train_output/SRDL-Net/{data_name}/
 ```
 
 
@@ -138,7 +139,7 @@ After training, run:
 ```bash
 python test.py \
   --data_name CFD-LEVIR-CD \
-  --model_path ./train_output/DSF-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
+  --model_path ./train_output/SRDL-Net/CFD-LEVIR-CD/Seg_epoch_best.pth
 ```
 
 The predicted change maps will be saved in the configured output directory.
@@ -147,7 +148,7 @@ The predicted change maps will be saved in the configured output directory.
 
 ## :camera: Qualitative Results
 
-Visual comparisons on the three CFD-CD benchmarks. Red regions indicate false alarms (false positives), and green regions indicate missed detections (false negatives). "Ours" denotes DSF-Net.
+Visual comparisons on the three CFD-CD benchmarks. Red regions indicate false alarms (false positives), and green regions indicate missed detections (false negatives). "Ours" denotes SRDL-Net.
 
 **CFD-LEVIR-CD**
 
